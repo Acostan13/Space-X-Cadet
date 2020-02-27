@@ -1,52 +1,25 @@
-import React, { Component } from "react";
-import YouTube from "react-youtube";
-import { LinkedinShareButton } from "react-share";
+import React, { Component } from 'react';
+import YouTube from 'react-youtube';
 
-class Random extends Component {
-  state = {
-    index: 89
-  };
-
-  // displayImages = () => {
-  //   return previousLaunch.links.flickr_images.map((newImage,i) => {
-  //     return <section key={i}>
-  //       <img className='' src={newImage} alt =''/>
-  //      </section>
-  //   })
-  // }
+class RandomLaunch extends Component {
 
   _onReady(event) {
     // access to player in all event handlers via event.target
     event.target.pauseVideo();
   }
-
   showLoadingScreen = () => {
-    return (
-      <div>
-        {" "}
-        <progress className="progress is-large is-info" max="100">
-          60%
-        </progress>
-      </div>
-    );
-  };
-
-  showNewestUploads = () => {
+    return <div> <progress className="progress is-large is-info" max="100">60%</progress>
+    </div>
+  }
+  displayRandomLaunch = () => {
     const opts = {
-      height: "390",
-      width: "640"
+      height: '390',
+      width: '640'
     };
-
-    let randomLaunch = this.props.allLaunches[
-      Math.floor(Math.random() * this.props.allLaunches.length)
-    ];
-
-    //let upcomingLaunches = randomLaunch[this.state.index];
-
-    // return this.props.allLaunches.map((previousLaunch,i)  => {
-    return (
+    let randomLaunch = this.props.allLaunches[Math.floor(Math.random()*this.props.allLaunches.length)];
+    return(
       <section className="section">
-        <div className="container is-fluid">
+        <div className="container is-fluid has-text-centered">
           <h1 className="title">{randomLaunch.mission_name} Mission</h1>
           <br></br>
           <div className="tile is-ancestor">
@@ -54,8 +27,6 @@ class Random extends Component {
               <div className="tile">
                 <div className="tile is-parent">
                   <article className="tile is-child notification is-info">
-                    {/* {this.displayImages()} */}
-
                     <h1 className="title">
                       {randomLaunch.mission_name} Lift Off!
                     </h1>
@@ -66,7 +37,7 @@ class Random extends Component {
                 </div>
               </div>
               <div className="tile is-parent">
-                <article className="tile is-child notification is-danger">
+                <article className="tile is-child notification is-dark">
                   <p className="title">
                     Watch The {randomLaunch.mission_name} Mission Launch!
                   </p>
@@ -87,7 +58,6 @@ class Random extends Component {
               <article className="tile is-child notification is-success">
                 <div className="content">
                   <p className="title">Mission Logo</p>
-
                   {/* <!-- Content --> */}
                   <img src={randomLaunch.links.mission_patch_small} alt="" />
                   <br></br>
@@ -124,13 +94,12 @@ class Random extends Component {
                 </div>
                 <br></br>
               </article>
-
-              <article className="tile is-child notification is-warning">
+              <article className="tile is-child notification is-light">
                 <p className="title">Learn More</p>
                 <div className="content">
                   <p className="subtitle">
                     <a
-                      className="button is-warning"
+                      className="button is-light"
                       href={randomLaunch.links.reddit_campaign}
                     >
                       {" "}
@@ -140,7 +109,7 @@ class Random extends Component {
                   <div className="content">
                     <p className="subtitle">
                       <a
-                        className="button is-warning"
+                        className="button is-light"
                         href={randomLaunch.links.presskit}
                       >
                         {" "}
@@ -149,14 +118,13 @@ class Random extends Component {
                     </p>
                     <p className="subtitle">
                       <a
-                        className="button is-warning"
+                        className="button is-light"
                         href={randomLaunch.links.wikipedia}
                       >
                         {" "}
                         Wikipedia
                       </a>
                     </p>
-                    {/* <LinkedinShareButton children='' url='https://www.linkedin.com/feed/'>Share to Linked-In</LinkedinShareButton> */}
                   </div>
                 </div>
               </article>
@@ -165,40 +133,16 @@ class Random extends Component {
         </div>
         <br></br>
         <br></br>
-        <button
-          className="button"
-          onClick={() =>
-            this.setState({
-              index:
-                this.state.index < 89 ? this.state.index + 1 : this.state.index
-            })
-          }
-        >
-          Next Launch
-        </button>
-        <button
-          className="button"
-          onClick={() =>
-            this.setState({
-              index:
-                this.state.index > 0 ? this.state.index - 1 : this.state.index
-            })
-          }
-        >
-          Previous Launch
-        </button>
       </section>
-    );
-    // })
-  };
-
+    )
+  }
   render() {
     return (
       <div>
-        {this.props.ready ? this.showNewestUploads() : this.showLoadingScreen()}
+        {this.props.ready? (this.displayRandomLaunch()) : (this.showLoadingScreen())}
       </div>
     );
   }
 }
 
-export default Random;
+export default RandomLaunch;

@@ -10,6 +10,10 @@ class AllLaunches extends Component {
     index: 89
   }
   
+  showLoadingScreen = () => {
+    return <div> <progress className="progress is-large is-info" max="100">60%</progress>
+    </div>
+  }
 
 
     _onReady(event) {

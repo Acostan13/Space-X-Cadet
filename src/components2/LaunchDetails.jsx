@@ -1,53 +1,31 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import YouTube from "react-youtube";
-import { LinkedinShareButton } from "react-share";
 
-class Random extends Component {
-  state = {
-    index: 89
-  };
-
-  // displayImages = () => {
-  //   return previousLaunch.links.flickr_images.map((newImage,i) => {
-  //     return <section key={i}>
-  //       <img className='' src={newImage} alt =''/>
-  //      </section>
-  //   })
-  // }
-
-  _onReady(event) {
-    // access to player in all event handlers via event.target
-    event.target.pauseVideo();
+class LaunchDetails extends Component {
+  
+  showLoadingScreen = () => {
+    return <div> <progress className="progress is-large is-info" max="100">60%</progress>
+    </div>
   }
 
-  showLoadingScreen = () => {
-    return (
-      <div>
-        {" "}
-        <progress className="progress is-large is-info" max="100">
-          60%
-        </progress>
-      </div>
-    );
-  };
+  
 
-  showNewestUploads = () => {
+  showDetailsOfASingleLaunch = () => {
     const opts = {
       height: "390",
       width: "640"
     };
 
-    let randomLaunch = this.props.allLaunches[
-      Math.floor(Math.random() * this.props.allLaunches.length)
-    ];
+    let theMission = this.props.allLaunches.find(eachLaunch => {
+      console.log(eachLaunch.mission_name)
+      return eachLaunch.mission_name === this.props.match.params.launchName;
+    });
+    
 
-    //let upcomingLaunches = randomLaunch[this.state.index];
-
-    // return this.props.allLaunches.map((previousLaunch,i)  => {
     return (
-      <section className="section">
-        <div className="container is-fluid">
-          <h1 className="title">{randomLaunch.mission_name} Mission</h1>
+<section className="section">
+        <div className="container is-fluid has-text-centered">
+          <h1 className="title">{theMission.mission_name} Mission</h1>
           <br></br>
           <div className="tile is-ancestor">
             <div className="tile is-vertical is-8">
@@ -57,10 +35,10 @@ class Random extends Component {
                     {/* {this.displayImages()} */}
 
                     <h1 className="title">
-                      {randomLaunch.mission_name} Lift Off!
+                      {theMission.mission_name} Lift Off!
                     </h1>
                     <figure className="image is-3by5">
-                      <img src={randomLaunch.links.flickr_images} alt="" />
+                      <img src={theMission.links.flickr_images} alt="" />
                     </figure>
                   </article>
                 </div>
@@ -68,14 +46,14 @@ class Random extends Component {
               <div className="tile is-parent">
                 <article className="tile is-child notification is-danger">
                   <p className="title">
-                    Watch The {randomLaunch.mission_name} Mission Launch!
+                    Watch The {theMission.mission_name} Mission Launch!
                   </p>
                   <div className="content">
                     {/* <!-- Content --> */}
                     <YouTube
                       className="container is-fluid"
                       playsInline
-                      videoId={randomLaunch.links.youtube_id}
+                      videoId={theMission.links.youtube_id}
                       opts={opts}
                       onReady={this._onReady}
                     />
@@ -89,29 +67,24 @@ class Random extends Component {
                   <p className="title">Mission Logo</p>
 
                   {/* <!-- Content --> */}
-                  <img src={randomLaunch.links.mission_patch_small} alt="" />
+                  <img src={theMission.links.mission_patch_small} alt="" />
                   <br></br>
                   <br></br>
                   <p className="title">Launch Date</p>
                   <div className="content">
                     <p className="subtitle">
-                      {randomLaunch.launch_date_local.slice(0, 10)}
+                      {theMission.launch_date_local.slice(0, 10)}
                     </p>
                   </div>
                   {/* <!-- Content --> */}
                   <p className="title">Rocket Name</p>
                   <div className="content">
-                    <p className="subtitle">
-                      {randomLaunch.rocket.rocket_name}
-                    </p>
+                    <p className="subtitle">{theMission.rocket.rocket_name}</p>
                   </div>
                   <p className="title">Manufacturer</p>
                   <div className="content">
                     <p className="subtitle">
-                      {
-                        randomLaunch.rocket.second_stage.payloads[0]
-                          .manufacturer
-                      }
+                      {theMission.rocket.second_stage.payloads[0].manufacturer}
                     </p>
                     <br></br>
                   </div>
@@ -120,7 +93,7 @@ class Random extends Component {
               <article className="tile is-child notification is-primary">
                 <div className="content">
                   <p className="title">Details</p>
-                  <p className="subtitle">{randomLaunch.details}</p>
+                  <p className="subtitle">{theMission.details}</p>
                 </div>
                 <br></br>
               </article>
@@ -131,7 +104,7 @@ class Random extends Component {
                   <p className="subtitle">
                     <a
                       className="button is-warning"
-                      href={randomLaunch.links.reddit_campaign}
+                      href={theMission.links.reddit_campaign}
                     >
                       {" "}
                       Reddit Campaign
@@ -141,7 +114,7 @@ class Random extends Component {
                     <p className="subtitle">
                       <a
                         className="button is-warning"
-                        href={randomLaunch.links.presskit}
+                        href={theMission.links.presskit}
                       >
                         {" "}
                         Press Kit
@@ -150,55 +123,33 @@ class Random extends Component {
                     <p className="subtitle">
                       <a
                         className="button is-warning"
-                        href={randomLaunch.links.wikipedia}
+                        href={theMission.links.wikipedia}
                       >
                         {" "}
                         Wikipedia
                       </a>
                     </p>
-                    {/* <LinkedinShareButton children='' url='https://www.linkedin.com/feed/'>Share to Linked-In</LinkedinShareButton> */}
                   </div>
                 </div>
               </article>
             </div>
           </div>
         </div>
-        <br></br>
-        <br></br>
-        <button
-          className="button"
-          onClick={() =>
-            this.setState({
-              index:
-                this.state.index < 89 ? this.state.index + 1 : this.state.index
-            })
-          }
-        >
-          Next Launch
-        </button>
-        <button
-          className="button"
-          onClick={() =>
-            this.setState({
-              index:
-                this.state.index > 0 ? this.state.index - 1 : this.state.index
-            })
-          }
-        >
-          Previous Launch
-        </button>
       </section>
-    );
-    // })
-  };
+    )
+  }
+
+  
 
   render() {
+    console.log(this.props.location.eachLaunch)
+
     return (
       <div>
-        {this.props.ready ? this.showNewestUploads() : this.showLoadingScreen()}
+        {this.props.ready? (this.showDetailsOfASingleLaunch()) : (this.showLoadingScreen())}
       </div>
     );
   }
 }
 
-export default Random;
+export default LaunchDetails;
