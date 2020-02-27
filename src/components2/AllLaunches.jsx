@@ -1,28 +1,23 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import YouTube from "react-youtube";
-
 
 class AllLaunches extends Component {
   state = {
-    index: 89,
-    eachMissionObj: {}
+    index: 89
   };
 
   showLoadingScreen = () => {
-    return <div> <progress className="progress is-large is-info" max="100">60%</progress>
-    </div>
-  }
+    return (
+      <div>
+        {" "}
+        <progress className="progress is-large is-info" max="100">
+          60%
+        </progress>
+      </div>
+    );
+  };
 
-  componentDidMount = async () => {
-    let currentMissionObj = await this.props.allLaunches[this.state.index]
-
-    this.setState({
-      eachMissionObj: currentMissionObj
-    })
-  }
   launchDetails = () => {
-    // let launchData = this.state.launch;
-    // console.log('launchData', launchData);
     const opts = {
       height: "390",
       width: "640"
@@ -30,7 +25,6 @@ class AllLaunches extends Component {
 
     let launchData = this.props.allLaunches[this.state.index];
 
-    // return this.props.allLaunches.map((previousLaunch,i)  => {
     return (
       <section className="section">
         <div className="container is-fluid has-text-centered">
@@ -145,41 +139,40 @@ class AllLaunches extends Component {
           </div>
           <br></br>
           <button
-          className="button"
-          disabled={this.state.index < 89 ? false : true}
-          onClick={() =>
-            this.setState({
-              index:
-                this.state.index < 89 ? this.state.index + 1 : this.state.index
-            })
-          }
-        >
-          Next Launch
-        </button>
-        <button
-          className="button"
-          disabled={this.state.index > 0 ? false : true}
-          onClick={() =>
-            this.setState({
-              index:
-                this.state.index > 0 ? this.state.index - 1 : this.state.index
-            })
-          }
-        >
-          Previous Launch
-        </button>
+            className="button"
+            disabled={this.state.index < 89 ? false : true}
+            onClick={() =>
+              this.setState({
+                index:
+                  this.state.index < 89
+                    ? this.state.index + 1
+                    : this.state.index
+              })
+            }
+          >
+            Next Launch
+          </button>
+          <button
+            className="button"
+            disabled={this.state.index > 0 ? false : true}
+            onClick={() =>
+              this.setState({
+                index:
+                  this.state.index > 0 ? this.state.index - 1 : this.state.index
+              })
+            }
+          >
+            Previous Launch
+          </button>
         </div>
       </section>
     );
-    // })
   };
 
-
   render() {
-    console.log(this, '???')
     return (
       <div>
-        {this.props.ready? (this.launchDetails()) : (this.showLoadingScreen())}
+        {this.props.ready ? this.launchDetails() : this.showLoadingScreen()}
       </div>
     );
   }

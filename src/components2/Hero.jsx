@@ -4,13 +4,7 @@ class Hero extends Component {
   render() {
     return (
       <div>
-        <img
-        //   className="has-ratio"
-        //   width="1200"
-        //   height="360"
-          src={require('../components2/spacex.jpg')}
-          alt="spacex"
-        />
+        <img src={require("../components2/spacex.jpg")} alt="spacex" />
       </div>
     );
   }

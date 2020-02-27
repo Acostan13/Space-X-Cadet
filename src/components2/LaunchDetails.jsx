@@ -1,12 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import YouTube from "react-youtube";
 
 class LaunchDetails extends Component {
-  
   showLoadingScreen = () => {
-    return <div> <progress className="progress is-large is-info" max="100">60%</progress>
-    </div>
-  }
+    return (
+      <div>
+        {" "}
+        <progress className="progress is-large is-info" max="100">
+          60%
+        </progress>
+      </div>
+    );
+  };
 
   showDetailsOfASingleLaunch = () => {
     const opts = {
@@ -15,13 +20,11 @@ class LaunchDetails extends Component {
     };
 
     let theMission = this.props.allLaunches.find(eachLaunch => {
-      console.log(eachLaunch.mission_name)
       return eachLaunch.mission_name === this.props.match.params.launchName;
     });
-    
 
     return (
-<section className="section">
+      <section className="section">
         <div className="container is-fluid has-text-centered">
           <h1 className="title">{theMission.mission_name} Mission</h1>
           <br></br>
@@ -42,7 +45,7 @@ class LaunchDetails extends Component {
                 </div>
               </div>
               <div className="tile is-parent">
-                <article className="tile is-child notification is-danger">
+                <article className="tile is-child notification is-light">
                   <p className="title">
                     Watch The {theMission.mission_name} Mission Launch!
                   </p>
@@ -60,7 +63,7 @@ class LaunchDetails extends Component {
               </div>
             </div>
             <div className="tile is-parent is-vertical">
-              <article className="tile is-child notification is-success">
+              <article className="tile is-child notification is-light">
                 <div className="content">
                   <p className="title">Mission Logo</p>
 
@@ -88,7 +91,7 @@ class LaunchDetails extends Component {
                   </div>
                 </div>
               </article>
-              <article className="tile is-child notification is-primary">
+              <article className="tile is-child notification is-link">
                 <div className="content">
                   <p className="title">Details</p>
                   <p className="subtitle">{theMission.details}</p>
@@ -96,12 +99,12 @@ class LaunchDetails extends Component {
                 <br></br>
               </article>
 
-              <article className="tile is-child notification is-warning">
+              <article className="tile is-child notification is-info">
                 <p className="title">Learn More</p>
                 <div className="content">
                   <p className="subtitle">
                     <a
-                      className="button is-warning"
+                      className="button is-info"
                       href={theMission.links.reddit_campaign}
                     >
                       {" "}
@@ -111,7 +114,7 @@ class LaunchDetails extends Component {
                   <div className="content">
                     <p className="subtitle">
                       <a
-                        className="button is-warning"
+                        className="button is-info"
                         href={theMission.links.presskit}
                       >
                         {" "}
@@ -120,7 +123,7 @@ class LaunchDetails extends Component {
                     </p>
                     <p className="subtitle">
                       <a
-                        className="button is-warning"
+                        className="button is-info"
                         href={theMission.links.wikipedia}
                       >
                         {" "}
@@ -134,17 +137,15 @@ class LaunchDetails extends Component {
           </div>
         </div>
       </section>
-    )
-  }
-
-  
+    );
+  };
 
   render() {
-    console.log(this.props.location.eachLaunch)
-
     return (
       <div>
-        {this.props.ready? (this.showDetailsOfASingleLaunch()) : (this.showLoadingScreen())}
+        {this.props.ready
+          ? this.showDetailsOfASingleLaunch()
+          : this.showLoadingScreen()}
       </div>
     );
   }

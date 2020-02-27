@@ -2,14 +2,19 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 class FeelingSpacey extends Component {
-
   showLoadingScreen = () => {
-    return <div> <progress className="progress is-large is-info" max="100">60%</progress>
-    </div>
-  }
+    return (
+      <div>
+        {" "}
+        <progress className="progress is-large is-info" max="100">
+          60%
+        </progress>
+      </div>
+    );
+  };
 
   displayFiveLatestLaunches = () => {
-    return this.props.allLaunches.slice(84,90).map((eachLaunch, index) => {
+    return this.props.allLaunches.slice(84, 90).map((eachLaunch, index) => {
       return (
         <div key={index}>
           <div className="card">
@@ -25,7 +30,7 @@ class FeelingSpacey extends Component {
                 </div>
                 <div className="media-content">
                   <Link to={`/all-launches/${eachLaunch.mission_name}`}>
-                    {eachLaunch.mission_name}
+                  <p className="title is-4">{eachLaunch.mission_name}</p>
                   </Link>
                   <p className="subtitle is-6">
                     {eachLaunch.rocket.rocket_name}
@@ -49,7 +54,9 @@ class FeelingSpacey extends Component {
   render() {
     return (
       <div>
-        {this.props.ready ? this.displayFiveLatestLaunches() : this.showLoadingScreen()}
+        {this.props.ready
+          ? this.displayFiveLatestLaunches()
+          : this.showLoadingScreen()}
       </div>
     );
   }

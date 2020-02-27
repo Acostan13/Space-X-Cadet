@@ -1,23 +1,30 @@
-import React, { Component } from 'react';
-import YouTube from 'react-youtube';
+import React, { Component } from "react";
+import YouTube from "react-youtube";
 
 class RandomLaunch extends Component {
-
   _onReady(event) {
     // access to player in all event handlers via event.target
     event.target.pauseVideo();
   }
   showLoadingScreen = () => {
-    return <div> <progress className="progress is-large is-info" max="100">60%</progress>
-    </div>
-  }
+    return (
+      <div>
+        {" "}
+        <progress className="progress is-large is-info" max="100">
+          60%
+        </progress>
+      </div>
+    );
+  };
   displayRandomLaunch = () => {
     const opts = {
-      height: '390',
-      width: '640'
+      height: "390",
+      width: "640"
     };
-    let randomLaunch = this.props.allLaunches[Math.floor(Math.random()*this.props.allLaunches.length)];
-    return(
+    let randomLaunch = this.props.allLaunches[
+      Math.floor(Math.random() * this.props.allLaunches.length)
+    ];
+    return (
       <section className="section">
         <div className="container is-fluid has-text-centered">
           <h1 className="title">{randomLaunch.mission_name} Mission</h1>
@@ -37,7 +44,7 @@ class RandomLaunch extends Component {
                 </div>
               </div>
               <div className="tile is-parent">
-                <article className="tile is-child notification is-dark">
+                <article className="tile is-child notification is-light">
                   <p className="title">
                     Watch The {randomLaunch.mission_name} Mission Launch!
                   </p>
@@ -55,7 +62,7 @@ class RandomLaunch extends Component {
               </div>
             </div>
             <div className="tile is-parent is-vertical">
-              <article className="tile is-child notification is-success">
+              <article className="tile is-child notification is-light">
                 <div className="content">
                   <p className="title">Mission Logo</p>
                   {/* <!-- Content --> */}
@@ -87,19 +94,19 @@ class RandomLaunch extends Component {
                   </div>
                 </div>
               </article>
-              <article className="tile is-child notification is-primary">
+              <article className="tile is-child notification is-link">
                 <div className="content">
                   <p className="title">Details</p>
                   <p className="subtitle">{randomLaunch.details}</p>
                 </div>
                 <br></br>
               </article>
-              <article className="tile is-child notification is-light">
+              <article className="tile is-child notification is-info">
                 <p className="title">Learn More</p>
                 <div className="content">
                   <p className="subtitle">
                     <a
-                      className="button is-light"
+                      className="button is-info"
                       href={randomLaunch.links.reddit_campaign}
                     >
                       {" "}
@@ -109,7 +116,7 @@ class RandomLaunch extends Component {
                   <div className="content">
                     <p className="subtitle">
                       <a
-                        className="button is-light"
+                        className="button is-info"
                         href={randomLaunch.links.presskit}
                       >
                         {" "}
@@ -118,7 +125,7 @@ class RandomLaunch extends Component {
                     </p>
                     <p className="subtitle">
                       <a
-                        className="button is-light"
+                        className="button is-info"
                         href={randomLaunch.links.wikipedia}
                       >
                         {" "}
@@ -134,12 +141,14 @@ class RandomLaunch extends Component {
         <br></br>
         <br></br>
       </section>
-    )
-  }
+    );
+  };
   render() {
     return (
       <div>
-        {this.props.ready? (this.displayRandomLaunch()) : (this.showLoadingScreen())}
+        {this.props.ready
+          ? this.displayRandomLaunch()
+          : this.showLoadingScreen()}
       </div>
     );
   }
