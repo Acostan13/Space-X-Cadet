@@ -8,8 +8,6 @@ class LaunchDetails extends Component {
     </div>
   }
 
-  
-
   showDetailsOfASingleLaunch = () => {
     const opts = {
       height: "390",

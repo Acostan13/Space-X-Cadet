@@ -1,5 +1,5 @@
 // import React, { Component } from 'react';
-// import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';1
 
 // class Navbar extends Component {
 
@@ -64,37 +64,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 class Navbar extends Component {
-
-  state = {
-    focus:true,
-    blur: false,
-    loading: true
-  }
-
-  handleInputChange = e => {
-    console.log(e.target.value);
-
-    this.setState({
-      query: e.target.value,
-      focus: true
-      // }, () => {
-      //   if (this.state.query && this.state.query.length > 1) {
-      //     if (this.state.query.length % 2 === 0) {
-      //       this.getInfo()
-      //     }
-      //   } else if (!this.state.query) {
-      //   }
-    });
-    this.filterTheLaunches(e.target.value);
-  };
-
-  focus = () => {
-    this.props.setState({ focus: !this.state.focus });
-  };
-
-  blur = () => {
-    this.setState({ focus: false });
-  };
+  
   render() {
     return (
       <div>
@@ -118,13 +88,11 @@ class Navbar extends Component {
                       <p className="control">
                         <input
                           className="input"
-                          onBlur={this.props.blur} onChange={this.props.handleInputChange}
+                          onBlur={this.props.blur}
+                          onChange={this.props.handleInputChange}
                           type="text"
                           placeholder="Find a launch"
                         />
-                      </p>
-                      <p className="control">
-                      <button className="button" onClick={this.props.focus}>I'm Feeling Spacey</button>
                       </p>
                     </>
                   )}
@@ -138,7 +106,7 @@ class Navbar extends Component {
                 <img
                   className=" is-rounded image is-96x96"
                   src="https://crealab.com.mx/blog/wp-content/uploads/2019/03/spacex-logo-1170x658.png"
-                  alt="NASA"
+                  alt="SPACEX"
                 />
               </Link>
 
@@ -150,7 +118,9 @@ class Navbar extends Component {
               <p className="level-item">
                 <Link to="/random-launch">Random</Link>
               </p>
-              {/* <p className="level-item"><Link to='/' className="button is-success">New</Link></p> */}
+              <p className="level-item">
+                <Link to="/feeling-spacey">I'm Feeling Spacey</Link>
+              </p>
             </div>
           </nav>
         </div>

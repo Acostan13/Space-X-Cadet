@@ -8,7 +8,7 @@ class Hero extends Component {
         //   className="has-ratio"
         //   width="1200"
         //   height="360"
-          src='../images/spacex.jpg'
+          src={require('../components2/spacex.jpg')}
           alt="spacex"
         />
       </div>

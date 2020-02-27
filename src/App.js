@@ -31,21 +31,21 @@ export default class App extends Component {
 }
 
 focus = () => {
-  this.setState({ focus: !this.state.focus });
+  this.setState({focus: !this.state.focus});
 };
 
 blur = () => {
-  this.setState({ focus: false });
+  this.setState({focus: false });
 };
 
 handleInputChange = e => {
   console.log(e.target.value);
 
+  this.filterTheLaunches(e.target.value);
   this.setState({
     query: e.target.value,
     focus: true
   });
-  this.filterTheLaunches(e.target.value);
 };
 
 filterTheLaunches = query => {
@@ -60,7 +60,8 @@ filterTheLaunches = query => {
 showFilteredLaunches = () => {
   console.log("heyyy");
   //console.log(this.state.filteredLaunches.splice(0,4))
-  return this.state.filteredLaunches.splice(0, 5).map(eachLaunch => {
+  return this.state.filteredLaunches.splice(0,4).map(eachLaunch => {
+    
     console.log(eachLaunch)
     return (
       <div key={eachLaunch}>
@@ -76,7 +77,7 @@ showFilteredLaunches = () => {
                 </figure>
               </div>
               <div className="media-content">
-                <Link to={ { pathname: `/all-launches/${eachLaunch.mission_name}`, query:{eachLaunch} } }>
+                <Link to={`/all-launches/${eachLaunch.mission_name}`} >
                   <p className="title is-4">{eachLaunch.mission_name}</p>
                 </Link>
                 <p className="subtitle is-6">
@@ -100,7 +101,7 @@ showFilteredLaunches = () => {
 
   render() {
     return (
-      <div>
+      <div key={this.state.ready}>
           <Navbar
             handleInputChange={this.handleInputChange}
             loading={this.state.loading}
@@ -109,7 +110,7 @@ showFilteredLaunches = () => {
             allLaunches={this.state.allLaunches}
           />
           {this.state.focus ? this.showFilteredLaunches() : ""}
-        <Hero />
+        
         <Switch>
           <Route exact path="/all-launches" render={props => <AllLaunches {...props} ready={this.state.ready} allLaunches={this.state.allLaunches}/>}/>
           <Route exact path="/all-launches/:launchName" render={props => <LaunchDetails {...props} ready={this.state.ready} allLaunches={this.state.allLaunches}/>}/>
@@ -117,6 +118,7 @@ showFilteredLaunches = () => {
           <Route exact path="/feeling-spacey" render={props => <FeelingSpacey {...props} ready={this.state.ready} allLaunches={this.state.allLaunches}/>}/>
           {/* <Route exact path="/filtered-launches" render={props => <FilteredLaunches {...props} ready={this.state.ready} allLaunches={this.state.allLaunches}/>}/> */}
         </Switch>
+        <Hero />
         <Footer />
       </div>
     )

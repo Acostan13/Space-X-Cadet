@@ -53,7 +53,7 @@ class AllLaunches extends Component {
                 </div>
               </div>
               <div className="tile is-parent">
-                <article className="tile is-child notification is-danger">
+                <article className="tile is-child notification is-light">
                   <p className="title">
                     Watch The {launchData.mission_name} Mission Launch!
                   </p>
@@ -71,7 +71,7 @@ class AllLaunches extends Component {
               </div>
             </div>
             <div className="tile is-parent is-vertical">
-              <article className="tile is-child notification is-success">
+              <article className="tile is-child notification is-light">
                 <div className="content">
                   <p className="title">Mission Logo</p>
 
@@ -99,7 +99,7 @@ class AllLaunches extends Component {
                   </div>
                 </div>
               </article>
-              <article className="tile is-child notification is-primary">
+              <article className="tile is-child notification is-link">
                 <div className="content">
                   <p className="title">Details</p>
                   <p className="subtitle">{launchData.details}</p>
@@ -107,12 +107,12 @@ class AllLaunches extends Component {
                 <br></br>
               </article>
 
-              <article className="tile is-child notification is-warning">
+              <article className="tile is-child notification is-info">
                 <p className="title">Learn More</p>
                 <div className="content">
                   <p className="subtitle">
                     <a
-                      className="button is-warning"
+                      className="button is-info"
                       href={launchData.links.reddit_campaign}
                     >
                       {" "}
@@ -122,7 +122,7 @@ class AllLaunches extends Component {
                   <div className="content">
                     <p className="subtitle">
                       <a
-                        className="button is-warning"
+                        className="button is-info"
                         href={launchData.links.presskit}
                       >
                         {" "}
@@ -131,7 +131,7 @@ class AllLaunches extends Component {
                     </p>
                     <p className="subtitle">
                       <a
-                        className="button is-warning"
+                        className="button is-info"
                         href={launchData.links.wikipedia}
                       >
                         {" "}

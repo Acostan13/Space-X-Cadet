@@ -9,7 +9,7 @@ class FeelingSpacey extends Component {
   }
 
   displayFiveLatestLaunches = () => {
-    return this.props.allLaunches.slice(89,85).map((eachLaunch, index) => {
+    return this.props.allLaunches.slice(84,90).map((eachLaunch, index) => {
       return (
         <div key={index}>
           <div className="card">
