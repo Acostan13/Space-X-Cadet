@@ -61,7 +61,6 @@ showFilteredLaunches = () => {
   console.log("heyyy");
   //console.log(this.state.filteredLaunches.splice(0,4))
   return this.state.filteredLaunches.splice(0,4).map(eachLaunch => {
-    
     console.log(eachLaunch)
     return (
       <div key={eachLaunch}>
@@ -77,7 +76,7 @@ showFilteredLaunches = () => {
                 </figure>
               </div>
               <div className="media-content">
-                <Link to={`/all-launches/${eachLaunch.mission_name}`} >
+                <Link onClick={() =>this.blur()} to={`/all-launches/${eachLaunch.mission_name}`} >
                   <p className="title is-4">{eachLaunch.mission_name}</p>
                 </Link>
                 <p className="subtitle is-6">
@@ -106,7 +105,7 @@ showFilteredLaunches = () => {
             handleInputChange={this.handleInputChange}
             loading={this.state.loading}
             focus={this.focus}
-            blur={this.blur}
+            // blur={this.blur}
             allLaunches={this.state.allLaunches}
           />
           {this.state.focus ? this.showFilteredLaunches() : ""}
