@@ -15,21 +15,21 @@ class Footer extends Component {
           <div className="content has-text-centered">
             <LinkedinShareButton
               children=""
-              url="https://trusting-dubinsky-02a599.netlify.com/"
+              url="https://space-x-cadet.netlify.com/"
               round="true"
             >
               <LinkedinIcon round="true"></LinkedinIcon>
             </LinkedinShareButton>
             <TwitterShareButton
               children=""
-              url="https://trusting-dubinsky-02a599.netlify.com/"
+              url="https://space-x-cadet.netlify.com/"
               round="true"
             >
               <TwitterIcon round="true"></TwitterIcon>
             </TwitterShareButton>
             <RedditShareButton
               children=""
-              url="https://trusting-dubinsky-02a599.netlify.com/"
+              url="https://space-x-cadet.netlify.com/"
             >
               <RedditIcon round="true"></RedditIcon>
             </RedditShareButton>
