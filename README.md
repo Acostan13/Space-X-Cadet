@@ -2,4 +2,4 @@
 ### A React-based project showcasing all of Space-X's Rocket Launches using Space-X's API, a Youtube API, and a social media sharing API.
 ![](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.sFUp3y7qZzCF5Sdepijm3wHaEK%26pid%3DApi&f=1)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
