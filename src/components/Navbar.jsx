@@ -31,7 +31,7 @@ class Navbar extends Component {
 
   {/* <!-- Right side --> */}
   <div className="level-right">
-    <Link to='/'><img className=" is-rounded image is-96x96" src='https://crealab.com.mx/blog/wp-content/uploads/2019/03/spacex-logo-1170x658.png' alt='NASA'/></Link>
+    <Link to='/'><img className=" is-rounded image is-96x96" src='https://seekvectorlogo.com/wp-content/uploads/2017/12/spacex-vector-logo.png' alt='NASA'/></Link>
     <p className="level-item"><Link to='/newest-uploads'>Latest Launches</Link></p>
     <p className="level-item"><Link to="/all-launches">Upcoming Launches</Link></p>
     <p className="level-item"><Link to='/'>Random Launch</Link></p>
