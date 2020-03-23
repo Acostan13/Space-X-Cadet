@@ -1,80 +1,158 @@
-import React, { Component } from 'react';
-import './App.css';
-import Navbar from './components/Navbar';
-import { Switch, Route} from 'react-router-dom'
-import Hero from './components/Hero';
-// import Section from './components/Section';
-import Footer from './components/Footer';
-import axios from 'axios';
-import Bulma from '../node_modules/bulma';
-import NewestUploads from './components/NewestUploads';
-import MostPopular from './components/MostPopular'
-import HomePage from './components/HomePage'
-import SingleLaunch from './components/SingleLaunch'
+import React, { Component } from "react";
+import { Switch, Route, Link } from "react-router-dom";
+import axios from "axios";
+import "bulma/css/bulma.css";
+// components
+import Navbar from "./components2/Navbar";
+import AllLaunches from "./components2/AllLaunches";
+import LaunchDetails from "./components2/LaunchDetails";
+import RandomLaunch from "./components2/RandomLaunch";
+import FeelingSpacey from "./components2/FeelingSpacey";
+import Hero from "./components2/Hero";
+import Footer from "./components2/Footer";
 
-
-class App extends Component {
+export default class App extends Component {
   state = {
-    recentMedia: [], //fill this array of beers with beers from the api
-    //randomMedia: [],
-    //query: 'mars',
+    allLaunches: [],
     ready: false,
-    showLaunch: false
+    focus: false
+  };
+
+  async componentDidMount() {
+    let allLaunches = await axios.get(
+      `https://api.spacexdata.com/v3/launches/past`
+    ); //This takes some time by the time it gets back
+
+    this.setState({
+      allLaunches: allLaunches.data,
+      ready: true
+    });
   }
 
-  async componentDidMount(){
-      //console.log('happens once on mount')
-      //https://images-api.nasa.gov/asset/?orderby=popular
-      //.then promise 
-      let latestLaunch = await axios.get(`https://api.spacexdata.com/v3/launches/latest`)//This takes some time by the time it gets back 
-          console.log(latestLaunch.data)
+  focus = () => {
+    this.setState({ focus: !this.state.focus });
+  };
 
-      let allLaunches = await axios.get(`https://api.spacexdata.com/v3/launches/past`)//This takes some time by the time it gets back 
-          console.log(allLaunches.data)
+  blur = () => {
+    this.setState({ focus: false });
+  };
 
+  handleInputChange = e => {
+    this.setState({
+      query: e.target.value,
+      focus: true
+    });
+    this.filterTheLaunches(e.target.value);
+  };
 
-      // let results = response.data.collection.items;
-      // results.sort((b,a) => {
-      //   let [monthA, dayA] = [a.data[0].date_created.split('-')[1], parseInt(a.data[0].date_created.split('-')[2])];
-      //   let [monthB, dayB] = [b.data[0].date_created.split('-')[1], parseInt(b.data[0].date_created.split('-')[2])];
-      //   // console.log(monthA, monthB, dayA, dayB);
-      //   if(monthA === monthB) return dayA - dayB;
-      //   return monthA - monthB;
-      // });
-      // console.log(results);
+  filterTheLaunches = query => {
+    let filteredLaunches = this.state.allLaunches.filter(eachLaunch => {
+      return eachLaunch.mission_name.toLowerCase().includes(query);
+    });
+    this.setState({
+      filteredLaunches
+    });
+  };
 
-          this.setState({
-            latestLaunch:latestLaunch.data,
-            allLaunches: allLaunches.data,
-            // randomMedia:recent.data,
-            ready: true
-      })
-      
-  }
+  showFilteredLaunches = () => {
+    return this.state.filteredLaunches.splice(0, 4).map(eachLaunch => {
+      return (
+        <div key={eachLaunch}>
+          <div className="card">
+            <div className="card-content">
+              <div className="media">
+                <div className="media-left">
+                  <figure className="image is-48x48">
+                    <img src={eachLaunch.links.mission_patch} alt="space x" />
+                  </figure>
+                </div>
+                <div className="media-content">
+                  <Link
+                    onClick={() => this.blur()}
+                    to={`/all-launches/${eachLaunch.mission_name}`}
+                  >
+                    <p className="title is-4">{eachLaunch.mission_name}</p>
+                  </Link>
+                  <p className="subtitle is-6">
+                    {eachLaunch.rocket.rocket_name}
+                  </p>
+                </div>
+              </div>
+              <div className="content">
+                {eachLaunch.details}
+                <br></br>
+                <time dateTime="2016-1-1">
+                  {eachLaunch.launch_date_local.slice(0, 10)}
+                </time>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    });
+  };
 
   render() {
     return (
-      <div>
-        <div className="App">
-    <Navbar />
-    <Hero />
-    {/* <Hero /> */}
-    <Switch>
-          <Route exact path ="/" render={(props) => <HomePage {...props} />}/>
-          {/* <Route exact path ="/NavBar" render={(props) => <NavBar {...props} />}/> */}
-          <Route exact path ="/newest-uploads" render={(props) => <NewestUploads {...props} latestLaunch={this.state.latestLaunch} ready={this.state.ready}/>}/>
-          <Route exact path ="/all-launches" render={(props) => <MostPopular {...props} allLaunches={this.state.allLaunches} ready={this.state.ready}/>}/>
-          {this.state.showLaunch && <Route exact path ="/" />}
-          {/* <Route exact path ="/new-beer" render={(props) => <NewBeer {...props} />}/>
-          <Route exact path ="/single-beer/:beername" render={(props) => <SingleBeer {...props} beers={this.state.beers} ready={this.state.ready}/>}/> */}
-    </Switch>
-    <button onClick={() => this.setState({showLaunch: !this.state.showLaunch})} ></button>
-    {/* <Section /> */}
-    <Footer />
-    </div>
+      <div key={this.state.allLaunches}>
+        <Navbar
+          handleInputChange={this.handleInputChange}
+          loading={this.state.loading}
+          focus={this.focus}
+          // blur={this.blur}
+          allLaunches={this.state.allLaunches}
+        />
+        {this.state.focus ? this.showFilteredLaunches() : ""}
+
+        <Switch>
+          <Route
+            exact
+            path="/all-launches"
+            render={props => (
+              <AllLaunches
+                {...props}
+                ready={this.state.ready}
+                allLaunches={this.state.allLaunches}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/all-launches/:launchName"
+            render={props => (
+              <LaunchDetails
+                {...props}
+                ready={this.state.ready}
+                allLaunches={this.state.allLaunches}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/random-launch"
+            render={props => (
+              <RandomLaunch
+                {...props}
+                ready={this.state.ready}
+                allLaunches={this.state.allLaunches}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/feeling-spacey"
+            render={props => (
+              <FeelingSpacey
+                {...props}
+                ready={this.state.ready}
+                allLaunches={this.state.allLaunches}
+              />
+            )}
+          />
+        </Switch>
+        <Hero />
+        <Footer />
       </div>
     );
   }
 }
-
-export default App;
