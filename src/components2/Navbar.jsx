@@ -28,7 +28,7 @@ class Navbar extends Component {
                           onBlur={this.props.blur}
                           onChange={this.props.handleInputChange}
                           type="text"
-                          placeholder="Find a launch"
+                          placeholder="Find a Launch"
                         />
                       </p>
                     </>
@@ -46,13 +46,13 @@ class Navbar extends Component {
                 />
               </Link>
               <p className="level-item">
+                <Link to="/feeling-spacey">Recent Launches</Link>
+              </p>
+              <p className="level-item">
                 <Link to={`/all-launches`}>All Launches</Link>
               </p>
               <p className="level-item">
-                <Link to="/random-launch">Random</Link>
-              </p>
-              <p className="level-item">
-                <Link to="/feeling-spacey">I'm Feeling Spacey</Link>
+                <Link to="/random-launch">I'm Feeling Spacey</Link>
               </p>
             </div>
           </nav>

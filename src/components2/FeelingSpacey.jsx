@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 class FeelingSpacey extends Component {
+  state = {
+    index: this.props.latestLaunch
+  }
   showLoadingScreen = () => {
     return (
       <div>
@@ -12,9 +15,12 @@ class FeelingSpacey extends Component {
       </div>
     );
   };
-
+  
   displayFiveLatestLaunches = () => {
-    return this.props.allLaunches.slice(84, 90).map((eachLaunch, index) => {
+    console.log(this.state.index)
+    let spaceyLaunches = Math.floor(Math.random() * this.state.index)
+    console.log(spaceyLaunches)
+    return this.props.allLaunches.slice(this.state.index- 4, this.state.index).map((eachLaunch, index) => {
       return (
         <div key={index}>
           <div className="card">
