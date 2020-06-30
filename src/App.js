@@ -14,6 +14,7 @@ import Footer from "./components2/Footer";
 export default class App extends Component {
   state = {
     allLaunches: [],
+    latestLaunch: 0,
     ready: false,
     focus: false
   };
@@ -25,6 +26,7 @@ export default class App extends Component {
 
     this.setState({
       allLaunches: allLaunches.data,
+      latestLaunch: allLaunches.data.length,
       ready: true
     });
   }
@@ -113,6 +115,7 @@ export default class App extends Component {
                 {...props}
                 ready={this.state.ready}
                 allLaunches={this.state.allLaunches}
+                latestLaunch={this.state.latestLaunch}
               />
             )}
           />

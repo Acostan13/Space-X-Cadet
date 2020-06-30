@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import YouTube from "react-youtube";
 
 class AllLaunches extends Component {
+  
   state = {
-    index: 89
+    index: this.props.latestLaunch - 1
   };
 
   showLoadingScreen = () => {
@@ -140,11 +141,11 @@ class AllLaunches extends Component {
           <br></br>
           <button
             className="button"
-            disabled={this.state.index < 89 ? false : true}
+            disabled={this.state.index < this.props.latestLaunch - 1 ? false : true}
             onClick={() =>
               this.setState({
                 index:
-                  this.state.index < 89
+                  this.state.index < this.props.latestLaunch - 1
                     ? this.state.index + 1
                     : this.state.index
               })
