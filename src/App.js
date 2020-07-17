@@ -109,7 +109,7 @@ export default class App extends Component {
         <Switch>
           <Route
             exact
-            path="/all-launches"
+            path="/lastest-launch"
             render={props => (
               <AllLaunches
                 {...props}
@@ -132,7 +132,7 @@ export default class App extends Component {
           />
           <Route
             exact
-            path="/random-launch"
+            path="/feeling-spacey"
             render={props => (
               <RandomLaunch
                 {...props}
@@ -143,7 +143,7 @@ export default class App extends Component {
           />
           <Route
             exact
-            path="/feeling-spacey"
+            path="/all-launches"
             render={props => (
               <FeelingSpacey
                 {...props}

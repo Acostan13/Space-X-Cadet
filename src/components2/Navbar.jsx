@@ -46,13 +46,13 @@ class Navbar extends Component {
                 />
               </Link>
               <p className="level-item">
-                <Link to="/feeling-spacey">Recent Launches</Link>
+                <Link to="/lastest-launch">Latest Launch</Link>
               </p>
               <p className="level-item">
                 <Link to={`/all-launches`}>All Launches</Link>
               </p>
               <p className="level-item">
-                <Link to="/random-launch">I'm Feeling Spacey</Link>
+                <Link to="/feeling-spacey">I'm Feeling Spacey</Link>
               </p>
             </div>
           </nav>
